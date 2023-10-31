@@ -11,7 +11,8 @@
     "lint": "eslint --ext .js,.cjs,.ts,.tsx .",
     "lint:fix": "eslint --ext .js,.cjs,.ts,.tsx . --fix",
     "format:fix": "prettier --write src/**/*.tsx src/**/*.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
@@ -20,8 +21,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx}": [
-        "npm run lint",
-        "git add ."
+        "npm run lint"
     ]
   },
   "dependencies": {
