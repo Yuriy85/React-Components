@@ -3,7 +3,6 @@ export const getShips = async (
 ) => {
   const data = await fetch(pageUrl);
   const result = await data.json();
-  console.log(result.results);
   return result.results;
 };
 
