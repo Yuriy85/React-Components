@@ -8,7 +8,7 @@ type ShipsData = { load: boolean; ships: ShipType[] };
 
 function BottomArea() {
   const [shipsData, setShipsData] = useState<ShipsData>({
-    load: true,
+    load: false,
     ships: [],
   });
 
@@ -18,6 +18,7 @@ function BottomArea() {
 
   async function getShipsData() {
     try {
+      setShipsData({ load: true, ships: [] });
       const data = await getShips();
       setShipsData({ load: false, ships: data });
     } catch (error) {

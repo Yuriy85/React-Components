@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const getShips = async (
   pageUrl = 'https://swapi.dev/api/starships/'
-) => {
+): Promise<ShipType[]> => {
   const result = await axios.get(pageUrl);
   return result.data.results;
 };
