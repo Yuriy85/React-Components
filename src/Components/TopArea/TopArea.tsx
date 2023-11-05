@@ -1,15 +1,13 @@
-import { Component } from 'react';
+import React from 'react';
 import SearchArea from '../SearchArea/SearchArea';
 import './TopArea.css';
 
-class TopArea extends Component {
-  render() {
-    return (
-      <>
-        <SearchArea />
-      </>
-    );
-  }
+function TopArea() {
+  return (
+    <>
+      <SearchArea />
+    </>
+  );
 }
 
 export default TopArea;

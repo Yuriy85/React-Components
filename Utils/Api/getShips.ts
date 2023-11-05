@@ -1,9 +1,10 @@
+import axios from 'axios';
+
 export const getShips = async (
   pageUrl = 'https://swapi.dev/api/starships/'
 ) => {
-  const data = await fetch(pageUrl);
-  const result = await data.json();
-  return result.results;
+  const result = await axios.get(pageUrl);
+  return result.data.results;
 };
 
 export type ShipType = {

@@ -1,55 +1,35 @@
-import { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import './BottomArea.css';
 import { getShips, ShipType } from '../../../Utils/Api/getShips';
-import Cards from '../Cards/Cards';
 import { Circles } from 'react-loader-spinner';
+import ShipsList from '../ShipsList/ShipsList';
 
-class BottomArea extends Component {
-  state: { load: boolean; shipsData: ShipType[] };
-  ships: () => Promise<ShipType[]>;
-  constructor(props: object) {
-    super(props);
-    this.ships = getShips;
-    this.state = { load: true, shipsData: [] };
-  }
+type ShipsData = { load: boolean; ships: ShipType[] };
 
-  async getShipsData() {
+function BottomArea() {
+  const [shipsData, setShipsData] = useState<ShipsData>({
+    load: true,
+    ships: [],
+  });
+
+  useEffect(() => {
+    getShipsData();
+  }, []);
+
+  async function getShipsData() {
     try {
-      const data = await this.ships();
-      this.setState({ load: false, shipsData: data });
+      const data = await getShips();
+      setShipsData({ load: false, ships: data });
     } catch (error) {
       error as Error;
     }
   }
 
-  render() {
-    this.getShipsData();
-    let ships: JSX.Element | null = null;
-
-    if (!this.state.load) {
-      ships = (
-        <div className="ships-list">
-          {this.state.shipsData.map((ship, index) => (
-            <Cards
-              key={index}
-              length={ship.length}
-              max_atmosphering_speed={ship.max_atmosphering_speed}
-              model={ship.model}
-              name={ship.name}
-              passengers={ship.passengers}
-            />
-          ))}
-        </div>
-      );
-    }
-
-    return (
-      <>
-        <Circles color="grey" visible={this.state.load} />
-        {ships}
-      </>
-    );
-  }
+  return shipsData.load ? (
+    <Circles color="grey" visible={shipsData.load} />
+  ) : (
+    <ShipsList ships={shipsData.ships} />
+  );
 }
 
 export default BottomArea;
