@@ -1,6 +1,6 @@
 import React from 'react';
-import { ShipType } from '../../../Utils/Api/getShips';
-import ShipCard from '../ShipCard/ShipCard';
+import { ShipType } from '../../../Api/getShips';
+import ShipCard from './ShipCard/ShipCard';
 
 function ShipsList({ ships: props }: { ships: ShipType[] }) {
   return (

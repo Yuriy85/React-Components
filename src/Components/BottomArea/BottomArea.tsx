@@ -1,35 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import MyButton from '../UI/MyButton/MyButton';
 import './BottomArea.css';
-import { getShips, ShipType } from '../../../Utils/Api/getShips';
-import { Circles } from 'react-loader-spinner';
-import ShipsList from '../ShipsList/ShipsList';
 
-type ShipsData = { load: boolean; ships: ShipType[] };
-
-function BottomArea() {
-  const [shipsData, setShipsData] = useState<ShipsData>({
-    load: false,
-    ships: [],
-  });
-
-  useEffect(() => {
-    getShipsData();
-  }, []);
-
-  async function getShipsData() {
-    try {
-      setShipsData({ load: true, ships: [] });
-      const data = await getShips();
-      setShipsData({ load: false, ships: data });
-    } catch (error) {
-      error as Error;
-    }
-  }
-
-  return shipsData.load ? (
-    <Circles color="grey" visible={shipsData.load} />
-  ) : (
-    <ShipsList ships={shipsData.ships} />
+function BottomArea(props: {
+  totalPages: number;
+  activePage: number;
+  setActivePage: React.Dispatch<React.SetStateAction<number>>;
+}) {
+  const pages = Array(props.totalPages)
+    .fill(1)
+    .map((v, i) => v + i);
+  return (
+    <div>
+      {pages.map((v) => (
+        <MyButton
+          active={props.activePage === v}
+          key={v}
+          onClick={() => props.setActivePage(v)}
+        >
+          {v}
+        </MyButton>
+      ))}
+    </div>
   );
 }
 

@@ -1,0 +1,6 @@
+.myInput {
+  padding: 5px;
+}
+.myInput:focus-visible {
+  outline: none;
+}
