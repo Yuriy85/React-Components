@@ -34,12 +34,12 @@ function ExtraArea(props: {
       <h1 className={classes.h1}>
         Detailed{' '}
         <span onClick={() => props.setUrl('')} className={classes.close}>
-          X
+          &#10006;
         </span>
       </h1>
       <div className={classes.wrapper}>
         {error ? (
-          <h1>
+          <h1 className={classes.h4}>
             Error... try letter... <br /> {error}
           </h1>
         ) : loading ? (

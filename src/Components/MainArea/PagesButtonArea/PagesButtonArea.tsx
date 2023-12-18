@@ -15,7 +15,10 @@ function PagesButtonArea(props: {
         <MyButton
           active={props.activePage === v}
           key={v}
-          onClick={() => props.setActivePage(v)}
+          onClick={(event: React.MouseEvent) => {
+            event.stopPropagation();
+            props.setActivePage(v);
+          }}
         >
           {v}
         </MyButton>

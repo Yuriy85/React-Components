@@ -14,6 +14,7 @@ function SearchArea(props: {
       <MyInput
         disabled={props.loading}
         value={inputValue}
+        onClick={(event: Event) => event.stopPropagation()}
         onChange={(event: Event) => {
           setInputValue((event?.target as HTMLInputElement).value);
         }}
