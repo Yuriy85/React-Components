@@ -7,12 +7,19 @@
 html {
   min-width: 280px;
 }
-#root {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 h1 {
   text-align: center;
+}
+
+#root {
+  display: flex;
+}
+
+.main-area {
+  margin: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

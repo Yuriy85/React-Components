@@ -10,3 +10,6 @@
   cursor: pointer;
   background: #607D8B;
 }
+.myBtn:disabled {
+  cursor: default;
+}

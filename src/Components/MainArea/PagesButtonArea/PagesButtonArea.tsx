@@ -1,8 +1,7 @@
 import React from 'react';
-import MyButton from '../UI/MyButton/MyButton';
-import './BottomArea.css';
+import MyButton from '../../UI/MyButton/MyButton';
 
-function BottomArea(props: {
+function PagesButtonArea(props: {
   totalPages: number;
   activePage: number;
   setActivePage: React.Dispatch<React.SetStateAction<number>>;
@@ -25,4 +24,4 @@ function BottomArea(props: {
   );
 }
 
-export default BottomArea;
+export default PagesButtonArea;

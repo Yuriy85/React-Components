@@ -30,6 +30,11 @@ export const getShips = async (
   return results;
 };
 
+export const getOnlyOneShip = async (pageUrl: string): Promise<ShipType> => {
+  const result = await axios.get(pageUrl);
+  return result.data;
+};
+
 export type ShipType = {
   MGLT?: string;
   cargo_capacity?: string;

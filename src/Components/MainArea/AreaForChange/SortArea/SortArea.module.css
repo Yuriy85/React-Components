@@ -1,0 +1,13 @@
+.select {
+  width: 150px;
+  margin: 5px;
+  padding: 5px;
+  text-align: center;
+  border-width: 2px;
+  border-style: inset;
+  border-color: rgb(118, 118, 118);
+}
+
+.select:focus-visible {
+  outline: none;
+}
