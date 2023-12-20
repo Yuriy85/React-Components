@@ -1,0 +1,43 @@
+.main {
+  width: 50%;
+  margin: 10px;
+  min-width: 280px;
+}
+
+.h1 {
+  top: 0;
+  position: sticky;
+  text-align: center;
+  background: inherit;
+}
+
+.wrapper {
+  position: sticky;
+  top: 41px;
+  background: none;
+}
+.h4 {
+  overflow: hidden;
+  background: none;
+  margin: 5px;
+}
+.spinner {
+  justify-content: center;
+  background: none;
+}
+
+.spinner svg {
+  background: none;
+  margin: 5px;
+}
+
+.close {
+  background: none;
+}
+.close:hover {
+  cursor: pointer;
+}
+
+.active {
+  background: rgb(0, 0, 0, 0.1);
+}

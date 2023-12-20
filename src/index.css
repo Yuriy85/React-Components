@@ -1,0 +1,47 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background: darkgray;
+}
+html {
+  min-width: 280px;
+}
+
+h1 {
+  text-align: center;
+}
+
+#root {
+  display: flex;
+}
+
+.main-area {
+  margin: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.animate-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.animate-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}
+.animate-exit {
+  opacity: 1;
+}
+.animate-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition:
+    opacity 300ms,
+    transform 300ms;
+}

@@ -1,0 +1,29 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 5px;
+  padding: 5px;
+  width: 250px;
+  height: 300px;
+  border-width: 2px;
+  border-style: inset;
+  border-color: rgb(118, 118, 118);
+  transition: all .1s;
+}
+
+.card:hover {
+  cursor: pointer;
+}
+
+.card:active {
+  background: rgb(0, 0, 0, 0.1);
+}
+
+.h3 {
+  text-align: center;
+  background: none;
+}
+.h4 {
+  background: none;
+}
