@@ -1,16 +1,22 @@
 import { Circles } from 'react-loader-spinner';
 import ShipsList from './ShipsList/ShipsList';
 import { ShipType } from '../../../Api/getShips';
+import { CSSTransition } from 'react-transition-group';
 
-function ShipsArea(props: {
-  load: boolean;
-  ships: ShipType[];
-  getShipUrl: (shipUrl: string | undefined) => void;
-}) {
-  return props.load ? (
-    <Circles color="grey" visible={props.load} />
-  ) : (
-    <ShipsList ships={props.ships} getShipUrl={props.getShipUrl} />
+function ShipsArea(props: { load: boolean; ships: ShipType[] }) {
+  return (
+    <>
+      <Circles color="grey" visible={props.load} />
+      <CSSTransition
+        in={!props.load}
+        timeout={300}
+        classNames="animate"
+        mountOnEnter
+        unmountOnExit
+      >
+        <ShipsList ships={props.ships} />
+      </CSSTransition>
+    </>
   );
 }
 

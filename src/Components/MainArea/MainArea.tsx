@@ -9,11 +9,10 @@ import { useFetching } from '../../hooks/useFetching';
 import { cardsOnPage, pageCount } from '../../../Utils/pages';
 import ErrorBundle from './ErrorBundle/ErrorBundle';
 import { Sort } from './AreaForChange/SortArea/SortArea';
+import { Outlet, useNavigate } from 'react-router-dom';
 
-function MainArea(props: {
-  getShipUrl: (shipUrl: string | undefined) => void;
-  changeUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
-}) {
+function MainArea() {
+  const navigate = useNavigate();
   const [shipsData, setShipsData] = useState<ShipType[]>([]);
   const [filteredShips, setFilteredShips] = useState<ShipType[]>([]);
   const [searchWord, setSearchWord] = useState('');
@@ -51,40 +50,39 @@ function MainArea(props: {
   }, [sortType]);
 
   return (
-    <div onClick={() => props.changeUrl('')} className="main-area">
-      <h1 style={{ textAlign: 'center' }}>React StarShips</h1>
-      <ErrorBundle badRequest={getShipsData} />
-      <AreaForChange
-        max={shipsData.length}
-        setCount={setCountPerPage}
-        setSort={setSortType}
-        loading={loading}
-        onchange={(event, wordForSearch: string) => {
-          event.preventDefault();
-          setSearchWord(wordForSearch);
-        }}
-      />
-      {error ? (
-        <h1>
-          Error... try letter... <br /> {error}
-        </h1>
-      ) : filteredShips.length || loading ? (
-        <ShipsArea
-          load={loading}
-          ships={filteredShips}
-          getShipUrl={props.getShipUrl}
+    <>
+      <div onClick={() => navigate('/')} className="main-area">
+        <h1 style={{ textAlign: 'center' }}>React StarShips</h1>
+        <ErrorBundle badRequest={getShipsData} />
+        <AreaForChange
+          max={shipsData.length}
+          setCount={setCountPerPage}
+          setSort={setSortType}
+          loading={loading}
+          onchange={(event, wordForSearch: string) => {
+            event.preventDefault();
+            setSearchWord(wordForSearch);
+          }}
         />
-      ) : (
-        <h1>Sorry... not found...</h1>
-      )}
-      {!loading && !error ? (
-        <PagesButtonArea
-          totalPages={totalPages}
-          activePage={page}
-          setActivePage={setPage}
-        />
-      ) : null}
-    </div>
+        {error ? (
+          <h1>
+            Error... try letter... <br /> {error}
+          </h1>
+        ) : filteredShips.length || loading ? (
+          <ShipsArea load={loading} ships={filteredShips} />
+        ) : (
+          <h1>Sorry... not found...</h1>
+        )}
+        {!loading && !error ? (
+          <PagesButtonArea
+            totalPages={totalPages}
+            activePage={page}
+            setActivePage={setPage}
+          />
+        ) : null}
+      </div>
+      <Outlet />
+    </>
   );
 }
 

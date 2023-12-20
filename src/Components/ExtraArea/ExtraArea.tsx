@@ -3,13 +3,12 @@ import { Circles } from 'react-loader-spinner';
 import { useFetching } from '../../hooks/useFetching';
 import { getOnlyOneShip } from '../../Api/getShips';
 import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { CSSTransition } from 'react-transition-group';
 
-function ExtraArea(props: {
-  url: string | undefined;
-  setUrl: React.Dispatch<React.SetStateAction<string | undefined>>;
-}) {
+function ExtraArea() {
+  const navigate = useNavigate();
   const [shipDetails, setShipDetails] = useState<string[]>(['']);
-
   const [getShipsData, loading, error] = useFetching(async (request) => {
     const shipData = await getOnlyOneShip(request as string);
     const result = [];
@@ -19,21 +18,17 @@ function ExtraArea(props: {
     setShipDetails(result);
   });
 
+  const params = useParams();
+
   useEffect(() => {
-    if (props.url) {
-      getShipsData(props.url as string);
-    }
-  }, [props.url]);
+    getShipsData(params.id);
+  }, [params]);
 
   return (
-    <div
-      className={
-        props.url ? [classes.main, classes.mainActive].join(' ') : classes.main
-      }
-    >
+    <div className={classes.main}>
       <h1 className={classes.h1}>
         Detailed{' '}
-        <span onClick={() => props.setUrl('')} className={classes.close}>
+        <span onClick={() => navigate('/')} className={classes.close}>
           &#10006;
         </span>
       </h1>
@@ -42,29 +37,42 @@ function ExtraArea(props: {
           <h1 className={classes.h4}>
             Error... try letter... <br /> {error}
           </h1>
-        ) : loading ? (
-          <Circles wrapperClass={classes.spinner} color="grey" visible />
         ) : (
-          <div style={{ background: 'none' }}>
-            {shipDetails.map((detail, index) => {
-              if (index % 2 === 1) {
-                return (
-                  <h4
-                    style={{ background: 'rgb(0, 0, 0, 0.1)' }}
-                    key={detail}
-                    className={classes.h4}
-                  >
-                    {detail}
-                  </h4>
-                );
-              }
-              return (
-                <h4 key={detail} className={classes.h4}>
-                  {detail}
-                </h4>
-              );
-            })}
-          </div>
+          <>
+            <Circles
+              visible={loading}
+              wrapperClass={classes.spinner}
+              color="grey"
+            />
+            <CSSTransition
+              in={!loading}
+              timeout={300}
+              classNames="animate"
+              mountOnEnter
+              unmountOnExit
+            >
+              <div style={{ background: 'none' }}>
+                {shipDetails.map((detail, index) => {
+                  if (index % 2 === 1) {
+                    return (
+                      <h4
+                        style={{ background: 'rgb(0, 0, 0, 0.1)' }}
+                        key={detail}
+                        className={classes.h4}
+                      >
+                        {detail}
+                      </h4>
+                    );
+                  }
+                  return (
+                    <h4 key={detail} className={classes.h4}>
+                      {detail}
+                    </h4>
+                  );
+                })}
+              </div>
+            </CSSTransition>
+          </>
         )}
       </div>
     </div>

@@ -1,17 +1,22 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ShipType } from '../../../../../Api/getShips';
 import classes from './ShipCard.module.css';
 
-function ShipCard(props: {
-  ship: ShipType;
-  openExtraArea: (shipUrl: string | undefined) => void;
-}) {
+function ShipCard(props: { ship: ShipType }) {
+  const navigate = useNavigate();
   return (
     <div
       className={classes.card}
       onClick={(event) => {
         event.stopPropagation();
-        props.openExtraArea(props.ship.url);
+        navigate(
+          `/detail/${props.ship.url
+            ?.split('/')
+            .filter((v) => v)
+            .slice(-1)
+            .join('')}`
+        );
       }}
     >
       <h3 className={classes.h3}>{props.ship.name} </h3>

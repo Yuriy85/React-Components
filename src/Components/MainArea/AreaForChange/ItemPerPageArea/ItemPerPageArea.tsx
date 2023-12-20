@@ -10,6 +10,7 @@ function ItemPerPageArea(props: {
       disabled={props.loading}
       className={classes.select}
       onChange={(event) => {
+        event.stopPropagation();
         props.setCount(+event.target.value);
       }}
     >

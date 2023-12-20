@@ -12,7 +12,10 @@ function AreaForChange(props: {
   onchange: (event: Event, searchWord: string) => void;
 }) {
   return (
-    <div className={classes.change}>
+    <div
+      className={classes.change}
+      onClick={(event) => event.stopPropagation()}
+    >
       <ItemPerPageArea
         loading={props.loading}
         max={props.max}

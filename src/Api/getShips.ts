@@ -30,8 +30,8 @@ export const getShips = async (
   return results;
 };
 
-export const getOnlyOneShip = async (pageUrl: string): Promise<ShipType> => {
-  const result = await axios.get(pageUrl);
+export const getOnlyOneShip = async (id: string): Promise<ShipType> => {
+  const result = await axios.get(`https://swapi.dev/api/starships/${id}`);
   return result.data;
 };
 
