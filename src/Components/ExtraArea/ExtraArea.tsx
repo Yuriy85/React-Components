@@ -2,9 +2,10 @@ import classes from './ExtraArea.module.css';
 import { Circles } from 'react-loader-spinner';
 import { useFetching } from '../../hooks/useFetching';
 import { getOnlyOneShip } from '../../Api/getShips';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import { AppDataContext } from '../../context';
 
 function ExtraArea() {
   const navigate = useNavigate();
@@ -19,10 +20,11 @@ function ExtraArea() {
   });
 
   const params = useParams();
+  const context = useContext(AppDataContext);
 
   useEffect(() => {
     getShipsData(params.id);
-  }, [params]);
+  }, [context?.urlForDetail]);
 
   return (
     <div className={classes.main}>
@@ -52,24 +54,18 @@ function ExtraArea() {
               unmountOnExit
             >
               <div style={{ background: 'none' }}>
-                {shipDetails.map((detail, index) => {
-                  if (index % 2 === 1) {
-                    return (
-                      <h4
-                        style={{ background: 'rgb(0, 0, 0, 0.1)' }}
-                        key={detail}
-                        className={classes.h4}
-                      >
-                        {detail}
-                      </h4>
-                    );
-                  }
-                  return (
-                    <h4 key={detail} className={classes.h4}>
-                      {detail}
-                    </h4>
-                  );
-                })}
+                {shipDetails.map((detail, index) => (
+                  <h4
+                    key={detail}
+                    className={
+                      index % 2 === 1
+                        ? classes.h4
+                        : [classes.h4, classes.active].join(' ')
+                    }
+                  >
+                    {detail}
+                  </h4>
+                ))}
               </div>
             </CSSTransition>
           </>

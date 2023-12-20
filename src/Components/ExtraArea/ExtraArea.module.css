@@ -37,3 +37,7 @@
 .close:hover {
   cursor: pointer;
 }
+
+.active {
+  background: rgb(0, 0, 0, 0.1);
+}
